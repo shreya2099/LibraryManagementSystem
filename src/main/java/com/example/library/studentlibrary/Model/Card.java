@@ -11,7 +11,7 @@ public class Card {
 
 
     @Id
-    @GeneratedValue(strategy = GeneratedType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @OneToOne(mappedBy= "card", cascade= CascadeType.ALL, fetch = FetchType.LAZY)
@@ -22,6 +22,9 @@ public class Card {
 
     @UpdateTimestamp
     private Date updatedOn;
+
+    @Enumerated
+    private CardStatus cardStatus;
 
     public int getId() {
         return id;
@@ -55,6 +58,13 @@ public class Card {
         this.updatedOn = updatedOn;
     }
 
+    public CardStatus getCardStatus() {
+        return cardStatus;
+    }
+
+    public void setCardStatus(CardStatus cardStatus) {
+        this.cardStatus = cardStatus;
+    }
 
 
 }

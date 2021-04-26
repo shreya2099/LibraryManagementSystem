@@ -1,6 +1,7 @@
 package com.example.library.studentlibrary.Model;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GeneratorType;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -9,18 +10,19 @@ import java.util.Date;
 @Entity
 public class Student {
 
+
     @Id
-    @GeneratedValue(stratergy= GenerationType.INDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    private string name;
+    private String name;
 
     private int age;
 
-    private string country;
+    private String country;
 
-    public Student() {
-    }
+    private String emailId;
+
 
     public Student(String email, String name, int age, String country) {
         this.emailId = email;
@@ -47,11 +49,11 @@ public class Student {
         this.id = id;
     }
 
-    public string getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(string name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -63,11 +65,11 @@ public class Student {
         this.age = age;
     }
 
-    public string getCountry() {
+    public String getCountry() {
         return country;
     }
 
-    public void setCountry(string country) {
+    public void setCountry(String country) {
         this.country = country;
     }
 
