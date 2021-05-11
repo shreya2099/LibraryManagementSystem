@@ -1,10 +1,12 @@
 package com.example.library.studentlibrary.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Card {
@@ -15,6 +17,7 @@ public class Card {
     private int id;
 
     @OneToOne(mappedBy= "card", cascade= CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("card")
     private Student student;
 
     @CreationTimestamp
@@ -23,8 +26,16 @@ public class Card {
     @UpdateTimestamp
     private Date updatedOn;
 
-    @Enumerated
+    @Enumerated( value= EnumType.STRING)
     private CardStatus cardStatus;
+
+    @OneToMany(mappedBy = "card", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("card")
+    private List<Book> books;
+
+    public Card(){
+        this.cardStatus= CardStatus.ACTIVATED;
+    }
 
     public int getId() {
         return id;
@@ -67,4 +78,11 @@ public class Card {
     }
 
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> bookList) {
+        this.books= bookList;
+    }
 }
